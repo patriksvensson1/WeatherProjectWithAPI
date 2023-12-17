@@ -77,7 +77,7 @@ def get_weather_data():
                 file_data[index] += f";{round(row['temperature'], 1)}"
 
         first_iteration = False
-        print("Weather data from location added.\n")
+        print("Weather forecast from location added.\n")
 
         user_input = input("Write 'stop' to stop, write anything else to add more locations: ")
         if user_input == "stop":
@@ -99,11 +99,30 @@ def create_file(file_data):
     print(f"File saved to: {user_home_directory}")
 
 
+def print_data(weather_data):
+    for line in weather_data:
+        print(line)
+
+
 def main():
-    print("This is a weather forecast application that extracts data to a .csv file.")
+    print("This is a weather forecast application that extracts forecast data from locations.")
     print("Write 'stop' to cancel.\n")
     weather_data = get_weather_data()
-    create_file(weather_data)
+
+    print("\nDo you want a .csv file with the data, print the data in console or exit the program?")
+    user_input = input("Enter 'file', 'print' or 'exit': ")
+
+    while user_input not in ('file', 'print', 'exit'):
+        user_input = input("Enter 'file', 'print' or 'exit': ")
+
+    if user_input == 'exit':
+        exit()
+
+    if user_input == 'file':
+        create_file(weather_data)
+
+    if user_input == 'print':
+        print_data(weather_data)
 
 
 if __name__ == "__main__":

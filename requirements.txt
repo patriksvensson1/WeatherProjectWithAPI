@@ -1,0 +1,5 @@
+certifi
+geopy
+pandas
+requests-cache
+retry-requests
