@@ -1,3 +1,5 @@
+# Note: Open-Meteo's API is free for Non-commercial use only.
+# More details can be found here: https://open-meteo.com/en/terms
 import os
 import openmeteo_requests
 import requests_cache
@@ -8,6 +10,7 @@ import geopy
 from retry_requests import retry
 from datetime import datetime
 from geopy.geocoders import Nominatim
+
 
 def get_weather_data():
     # Create SSL_Context so that Nominatim can be used
@@ -62,7 +65,6 @@ def get_weather_data():
         # Keep track of index so that we can update the same row if multiple inputs
         index = 0
 
-
         if first_iteration:
             file_data.append(f";{location}")
         else:
@@ -92,7 +94,7 @@ def create_file(file_data):
     file_name = "Weather_Forecast_" + current_datetime + ".csv"
 
     with open(user_home_directory + "/" + file_name, 'w') as file:
-        file.write(f"7-Day Weather Forecast - Hourly Intervals - Degrees in Celsius - From Open-Meteo ({current_datetime})\n")
+        file.write(f"7-Day Forecast - Hourly Intervals - Degrees in Celsius - From Open-Meteo ({current_datetime})\n")
         for line in file_data:
             file.write(line + '\n')
 
